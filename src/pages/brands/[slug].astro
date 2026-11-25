@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import DisclaimerBox from '../../components/DisclaimerBox.astro';
+import { SITE, IMG_DIMS, whatsappUrl } from '../../config/site';
+import { BRANDS, type BrandPage } from '../../data/brands';
+
+export function getStaticPaths() {
+  return BRANDS.map((brand) => ({
+    params: { slug: brand.slug },
+    props: { brand },
+  }));
+}
+
+interface Props {
+  brand: BrandPage;
+}
+
+const { brand } = Astro.props;
+const waHref = whatsappUrl(brand.waMessage);
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'الماركات', href: '/brands' },
+  { label: `صيانة ${brand.brandAr}`, href: brand.url },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: brand.h1,
+    description: brand.meta,
+    provider: { '@id': `${SITE.domain}/#localbusiness` },
+    areaServed: { '@type': 'Country', name: 'Egypt' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: brand.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={brand.title}
+  description={brand.meta}
+  canonicalPath={brand.url}
+  ogImage={brand.image}
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container inner-hero-grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a href="/">الرئيسية</a>
+          <span class="sep">/</span>
+          <a href="/brands">الماركات</a>
+          <span class="sep">/</span>
+          <span>صيانة {brand.brandAr}</span>
+        </nav>
+        <span class="eyebrow">{brand.brandEn} • صيانة مستقلة خارج الضمان</span>
+        <h1>{brand.h1}</h1>
+        <p>{brand.heroLead}</p>
+        <div class="hero-cta-row">
+          <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            حجز صيانة {brand.brandAr} واتساب
+          </a>
+          <a href={SITE.phoneHref} class="btn btn-accent">
+            اتصل: <span dir="ltr">{SITE.phoneDisplay}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="inner-hero-photo">
+        <img
+          src={brand.image}
+          alt={brand.imageAlt}
+          width={IMG_DIMS[brand.image].w}
+          height={IMG_DIMS[brand.image].h}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="prose-block">
+        <DisclaimerBox brandNameAr={brand.brandAr} />
+
+        <h2>أجهزة {brand.brandAr} التي نصلحها بالمنزل</h2>
+        <div class="cards-grid-2" style="margin:1.25rem 0 2rem;">
+          {brand.appliancesCovered.map((item) => (
+            <div class="info-card">
+              <h3>{item.name}</h3>
+              <p style="margin-bottom:0.85rem;">{item.details}</p>
+              <a href={item.serviceHref} style="color:var(--accent); font-weight:700; font-size:0.86rem;">
+                تفاصيل قسم الخدمة ←
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <h2>أشهر أعطال وأكواد أجهزة {brand.brandAr} وحلولها الفنية</h2>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>العطل / الكود</th>
+                <th>السبب الفني المحتمل</th>
+                <th>طريقة الإصلاح في أركان</th>
+              </tr>
+            </thead>
+            <tbody>
+              {brand.commonFaults.map((f) => (
+                <tr>
+                  <td><strong>{f.fault}</strong></td>
+                  <td>{f.cause}</td>
+                  <td>{f.solution}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>ضمان أركان وقطع الغيار الأصلية لأجهزة {brand.brandAr}</h2>
+        <p>
+          يتم فحص جهاز {brand.brandAr} داخل منزلك وتحديد العطل بدقة مع إبلاغك بالتكلفة الكاملة قبل تنفيذ أي إصلاح. نلتزم بتركيب قطع غيار أصلية مطابقة للموديل وتسليم القطعة التالفة للعميل مع شهادة ضمان مكتوبة من أركان (6 إلى 12 شهراً).
+        </p>
+
+        <ConversionBanner
+          title={`تحتاج فني متخصص لصيانة جهاز ${brand.brandAr} اليوم؟`}
+          waMessage={brand.waMessage}
+        />
+
+        <FaqSection title={`أسئلة شائعة حول صيانة ${brand.brandAr}`} items={brand.faqs} />
+      </article>
+
+      <aside class="sidebar-sticky">
+        <div class="sidebar-card dark">
+          <h3>حجز صيانة {brand.brandAr}</h3>
+          <p style="font-size:0.88rem; color:rgba(255,255,255,0.8); margin:0 0 1.1rem;">
+            {brand.demandLabel}
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+              حجز عبر واتساب
+            </a>
+            <a href={SITE.phoneHref} class="btn btn-accent btn-sm" dir="ltr">{SITE.phoneDisplay}</a>
+            <a href="/contact" class="btn btn-outline-light btn-sm">نموذج الحجز الفوري</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>الأقسام والأدلة المرتبطة</h3>
+          <ul class="sidebar-links">
+            {brand.relatedLinks.map((lnk) => (
+              <li><a href={lnk.href}><span>{lnk.label}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>ماركات أخرى نصلحها</h3>
+          <ul class="sidebar-links">
+            {BRANDS.filter((x) => x.slug !== brand.slug).slice(0, 8).map((other) => (
+              <li><a href={other.url}><span>صيانة {other.brandAr}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

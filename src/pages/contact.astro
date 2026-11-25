@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DisclaimerBox from '../components/DisclaimerBox.astro';
+import { SITE, whatsappUrl } from '../config/site';
+
+const title = 'تواصل معنا | أرقام صيانة الأجهزة المنزلية وحجز فني فوري بالمنزل في مصر';
+const description =
+  'اتصل الآن أو تواصل عبر واتساب لحجز فني صيانة تكييفات، ثلاجات، ديب فريزر، غسالات، بوتاجازات، سخانات، ميكروويف أو شاشات في منزلك بأي محافظة في مصر.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'تواصل معنا', href: '/contact' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: title,
+    description,
+    url: `${SITE.domain}/contact`,
+  },
+];
+
+const waLink = whatsappUrl();
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/contact"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="مسار التنقل">
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <span>تواصل معنا</span>
+      </nav>
+      <span class="eyebrow">حجز فني صيانة في نفس اليوم</span>
+      <h1>تواصل معنا الآن لحجز فني صيانة بالمنزل في أسرع وقت</h1>
+      <p style="max-width:700px;">
+        اختر الطريقة الأنسب لك: اتصال مباشر، رسالة واتساب فورية، أو ملء نموذج الحجز السريع ليقوم فريق التنسيق بتأكيد الموعد خلال دقائق.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <div>
+        <h2 class="section-title" style="font-size:1.85rem;">نموذج حجز صيانة فوري (يتحول مباشرة لواتساب)</h2>
+        <p style="color:var(--ink-secondary); margin:0 0 1.5rem;">
+          أدخل بيانات الجهاز والمنطقة وسيتجهز طلبك تلقائياً لإرساله عبر واتساب لخدمة العملاء وتأكيد أقرب موعد زيارة.
+        </p>
+
+        <form id="booking-form" class="form-grid">
+          <div class="form-field">
+            <label for="f-name">الاسم الكريم</label>
+            <input id="f-name" name="name" type="text" required placeholder="مثال: أ. محمود أحمد" />
+          </div>
+          <div class="form-field">
+            <label for="f-phone">رقم الهاتف</label>
+            <input id="f-phone" name="phone" type="tel" required placeholder="010xxxxxxxx" dir="ltr" />
+          </div>
+          <div class="form-field">
+            <label for="f-city">المحافظة / الحي</label>
+            <input id="f-city" name="city" type="text" required placeholder="مثال: التجمع الخامس / مدينة نصر / سموحة" />
+          </div>
+          <div class="form-field">
+            <label for="f-device">نوع الجهاز</label>
+            <select id="f-device" name="device" required>
+              <option value="تكييف">تكييف</option>
+              <option value="ثلاجة">ثلاجة</option>
+              <option value="ديب فريزر">ديب فريزر</option>
+              <option value="غسالة ملابس">غسالة ملابس</option>
+              <option value="غسالة أطباق">غسالة أطباق</option>
+              <option value="بوتاجاز / فرن">بوتاجاز / فرن</option>
+              <option value="سخان غاز / كهرباء">سخان غاز / كهرباء</option>
+              <option value="ميكروويف">ميكروويف</option>
+              <option value="شاشة تلفزيون">شاشة تلفزيون</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="f-brand">الماركة (اختياري)</label>
+            <input id="f-brand" name="brand" type="text" placeholder="مثال: كريازي، توشيبا، LG، زانوسي، كاريير، فريش..." />
+          </div>
+          <div class="form-field full">
+            <label for="f-issue">وصف العطل أو الكود الظاهر</label>
+            <textarea id="f-issue" name="issue" rows="3" required placeholder="اكتب وصفاً مختصراً للمشكلة أو الكود الظاهر على الشاشة..."></textarea>
+          </div>
+          <div class="form-field full">
+            <button type="submit" class="btn btn-whatsapp" style="width:100%;">
+              إرسال طلب الحجز وتأكيد الموعد عبر واتساب
+            </button>
+          </div>
+        </form>
+
+        <DisclaimerBox />
+      </div>
+
+      <aside class="sidebar-sticky">
+        <div class="sidebar-card dark">
+          <h3>أرقام الاتصال المباشر وواتساب</h3>
+          <p style="font-size:0.9rem; color:rgba(255,255,255,0.8); margin:0 0 1rem;">
+            فريق خدمة التنسيق متاح يومياً للرد الفوري وتحديد أقرب فني في منطقتك.
+          </p>
+          <p style="font-size:1.25rem; font-weight:800; margin:0 0 0.4rem;" dir="ltr">
+            <a href={SITE.phoneHref} style="color:#ff946c;">{SITE.phoneDisplay}</a>
+          </p>
+          <p style="font-size:0.86rem; color:rgba(255,255,255,0.75); margin:0 0 1.1rem;">
+            {SITE.workingHours}
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <a href={SITE.phoneHref} class="btn btn-accent btn-sm">اتصال هاتفي مباشر</a>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+              محادثة واتساب فورية
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>مناطق التغطية اليومية</h3>
+          <ul class="sidebar-links">
+            <li><a href="/coverage/cairo"><span>القاهرة والمدن الجديدة</span><span>←</span></a></li>
+            <li><a href="/coverage/giza"><span>الجيزة وأكتوبر وزايد</span><span>←</span></a></li>
+            <li><a href="/coverage/alexandria"><span>الإسكندرية والساحل</span><span>←</span></a></li>
+            <li><a href="/coverage/egypt-governorates"><span>الدلتا والقناة والصعيد</span><span>←</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>روابط الثقة والضمان</h3>
+          <ul class="sidebar-links">
+            <li><a href="/how-it-works"><span>كيف نعمل في 4 خطوات</span><span>←</span></a></li>
+            <li><a href="/warranty-and-parts"><span>سياسة الضمان وقطع الغيار</span><span>←</span></a></li>
+            <li><a href="/"><span>العودة للرئيسية</span><span>←</span></a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ waNum: SITE.whatsappNumber }}>
+    const form = document.getElementById('booking-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const msg = [
+          'مرحباً أركان، أريد حجز فني صيانة بالمنزل:',
+          `الاسم: ${fd.get('name')}`,
+          `الهاتف: ${fd.get('phone')}`,
+          `المنطقة: ${fd.get('city')}`,
+          `الجهاز: ${fd.get('device')}`,
+          fd.get('brand') ? `الماركة: ${fd.get('brand')}` : '',
+          `العطل: ${fd.get('issue')}`,
+        ]
+          .filter(Boolean)
+          .join('\n');
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      });
+    }
+  </script>
+</BaseLayout>

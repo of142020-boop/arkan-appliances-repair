@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import { SITE, IMG_DIMS } from '../../config/site';
+import { BLOG_ARTICLES, type BlogArticle } from '../../data/blog';
+
+export function getStaticPaths() {
+  return BLOG_ARTICLES.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: BlogArticle;
+}
+
+const { article } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'المدونة والأدلة', href: '/blog' },
+  { label: article.category, href: article.url },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.h1,
+    description: article.meta,
+    image: `${SITE.domain}${article.image}`,
+    datePublished: article.publishedDate,
+    dateModified: article.publishedDate,
+    author: { '@type': 'Organization', name: SITE.brandFullName },
+    publisher: { '@id': `${SITE.domain}/#localbusiness` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: article.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.meta}
+  canonicalPath={article.url}
+  ogImage={article.image}
+  ogType="article"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container inner-hero-grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a href="/">الرئيسية</a>
+          <span class="sep">/</span>
+          <a href="/blog">المدونة والأدلة</a>
+          <span class="sep">/</span>
+          <span>{article.category}</span>
+        </nav>
+        <span class="eyebrow">{article.category} • {article.readTime}</span>
+        <h1>{article.h1}</h1>
+        <p>{article.excerpt}</p>
+        <div class="hero-cta-row">
+          <a href={article.ctaServiceHref} class="btn btn-accent">{article.ctaServiceLabel}</a>
+          <a href={SITE.phoneHref} class="btn btn-outline-light" dir="ltr">{SITE.phoneDisplay}</a>
+        </div>
+      </div>
+
+      <div class="inner-hero-photo">
+        <img
+          src={article.image}
+          alt={article.imageAlt}
+          width={IMG_DIMS[article.image].w}
+          height={IMG_DIMS[article.image].h}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="prose-block">
+        {article.sections.map((sec, idx) => (
+          <section style="margin-bottom:2rem;">
+            <h2>{sec.heading}</h2>
+            <p>{sec.body}</p>
+            {sec.bullets && (
+              <ul>
+                {sec.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+            {idx === 0 && (
+              <div class="disclaimer-box" style="margin-top:1.25rem;">
+                <strong>تحتاج فحصاً فورياً؟</strong>{' '}
+                يمكنك الانتقال مباشرةً إلى{' '}
+                <a href={article.ctaServiceHref} style="color:var(--accent); font-weight:700; text-decoration:underline;">
+                  {article.ctaServiceLabel}
+                </a>{' '}
+                لحجز فني متخصص بالمنزل في نفس اليوم.
+              </div>
+            )}
+          </section>
+        ))}
+
+        {article.table && (
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  {article.table.headers.map((h) => (
+                    <th>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {article.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell, ci) => (
+                      <td>{ci === 0 ? <strong>{cell}</strong> : cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        <ConversionBanner title={article.ctaTitle} />
+
+        <FaqSection items={article.faqs} />
+      </article>
+
+      <aside class="sidebar-sticky">
+        <div class="sidebar-card dark">
+          <h3>احجز فني أركان الآن</h3>
+          <p style="font-size:0.88rem; color:rgba(255,255,255,0.8); margin:0 0 1rem;">
+            {article.ctaTitle}
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <a href={article.ctaServiceHref} class="btn btn-accent btn-sm">{article.ctaServiceLabel}</a>
+            <a href="/contact" class="btn btn-white btn-sm">نموذج الحجز الفوري</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>صفحات وأدلة ذات صلة</h3>
+          <ul class="sidebar-links">
+            {article.relatedLinks.map((lnk) => (
+              <li><a href={lnk.href}><span>{lnk.label}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

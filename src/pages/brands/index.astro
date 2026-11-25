@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import DisclaimerBox from '../../components/DisclaimerBox.astro';
+import { SITE } from '../../config/site';
+import { BRANDS } from '../../data/brands';
+
+const title = 'صيانة جميع ماركات الأجهزة المنزلية في مصر | مركز صيانة مستقل لجميع العلامات';
+const description =
+  'نقدم خدمة صيانة مستقلة احترافية لأكثر من 35 ماركة أجهزة منزلية في مصر (كريازي، توشيبا، LG، زانوسي، فريش، شارب، سامسونج، كاريير، بيكو، أريستون وغيرها) بقطع أصلية وضمان.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'دليل الماركات', href: '/brands' },
+];
+
+const extraMinorBrands = [
+  'كلاج (Clage — سخانات فورية)',
+  'ويرلبول (Whirlpool)',
+  'أتلانتيك (Atlantic)',
+  'ميتاج (Maytag)',
+  'سبيد كوين (Speed Queen)',
+  'سانيو (Sanyo)',
+  'جليم جاز (Glem Gas)',
+  'سيلتال (Siltal)',
+  'باساب (Passap)',
+  'ديلونجي (DeLonghi)',
+  'ميلة (Miele)',
+  'كينوود (Kenwood)',
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'دليل الماركات التي نصلحها في مصر',
+    description,
+    url: `${SITE.domain}/brands`,
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/brands"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="مسار التنقل">
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <span>دليل الماركات</span>
+      </nav>
+      <span class="eyebrow">+35 علامة تجارية مصرية وعالمية</span>
+      <h1>دليل الماركات التي نصلحها في مصر — مركز صيانة مستقل بمهندسين متخصصين</h1>
+      <p style="max-width:740px;">
+        اختر ماركة جهازك لتصفح تفاصيل الصيانة، الأجهزة المغطاة، أشهر الأعطال والأكواد، وتوافر قطع الغيار الأصلية بالمنزل في جميع محافظات مصر.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <DisclaimerBox />
+
+      <h2 class="section-title" style="margin-top:2rem;">
+        أشهر الماركات المصرية والعالمية المتوفرة لها قطع غيار أصلية لدينا
+      </h2>
+      <div class="cards-grid-3" style="margin-top:1.75rem;">
+        {BRANDS.map((b) => (
+          <a href={b.url} class="info-card">
+            <span class="eyebrow" style="margin-bottom:0.3rem;">{b.brandEn}</span>
+            <h3>صيانة {b.brandAr}</h3>
+            <p style="margin-bottom:0.75rem;">{b.shortDesc}</p>
+            <span style="font-size:0.82rem; font-weight:700; color:var(--accent);">
+              {b.demandLabel} ←
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <section style="margin-top:3.5rem;">
+        <h2 class="section-title">
+          صيانة الماركات التخصصية والنادرة (ويرلبول، كلاج، أتلانتيك، جليم جاز، سيلتال، باساب، ميتاج)
+        </h2>
+        <p class="section-lead" style="margin-bottom:1.5rem;">
+          إضافةً إلى الماركات الـ 16 الرئيسية، يوفر فريق أركان فحصاً وإصلاحاً دقيقاً للماركات الأوروبية والتخصصية التالية بقطع غيار مطابقة للمواصفات:
+        </p>
+        <div class="cards-grid-3">
+          {extraMinorBrands.map((mb) => (
+            <div class="info-card" style="padding:1rem 1.25rem;">
+              <strong style="color:var(--navy-deep);">{mb}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <ConversionBanner
+        title="ماركة جهازك غير موجودة بالقائمة؟ تواصل معنا الآن"
+        subtitle="أرسل صورة موديل الجهاز عبر واتساب وسنؤكد لك توفر قطع الغيار وموعد زيارة الفني في نفس اليوم."
+      />
+    </div>
+  </section>
+</BaseLayout>

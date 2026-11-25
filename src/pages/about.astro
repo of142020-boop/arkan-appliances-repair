@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import { SITE, IMG_DIMS } from '../config/site';
+
+const title = 'من نحن | مركز متخصص في صيانة الأجهزة المنزلية الكهربائية في مصر';
+const description =
+  'تعرف على فريق المهندسين والفنيين المتخصصين لدينا في صيانة التكييفات والثلاجات والغسالات والبوتاجازات والسخانات والشاشات في جميع محافظات مصر بأمانة ودقة.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'من نحن', href: '/about' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: title,
+    description,
+    url: `${SITE.domain}/about`,
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/about"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container inner-hero-grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a href="/">الرئيسية</a>
+          <span class="sep">/</span>
+          <span>من نحن</span>
+        </nav>
+        <span class="eyebrow">ARKAN CARE • مصر</span>
+        <h1>من نحن: فريق فني متخصص لصيانة الأجهزة المنزلية الكهربائية في مصر</h1>
+        <p>
+          تأسست أركان لتقديم نموذج حديث وشفاف لصيانة الأجهزة المنزلية داخل المنزل في مصر يجمع بين الخبرة الهندسية الدقيقة، القطع الأصلية، والالتزام الصارم بالمواعيد.
+        </p>
+      </div>
+      <div class="inner-hero-photo">
+        <img
+          src="/images/editorial-technician-care.webp"
+          alt="فريق مهندسي صيانة أركان للأجهزة المنزلية في مصر"
+          width={IMG_DIMS['/images/editorial-technician-care.webp'].w}
+          height={IMG_DIMS['/images/editorial-technician-care.webp'].h}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-block" style="max-width:940px;">
+      <h2>رسالتنا: صيانة منزلية موثوقة بدون نقل الجهاز وبشفافية كاملة في التسعير</h2>
+      <p>
+        نعلم أن تعطل الثلاجة أو الغسالة أو التكييف أو السخان يربك يوم الأسرة بالكامل؛ لذا صممنا خدماتنا لإرسال المهندس المتخصص مباشرةً إلى منزلك بأدوات التشخيص وقطع الغيار الأصلية لإنهاء الإصلاح في أسرع وقت وبسعر عادل واضح مسبقاً.
+      </p>
+
+      <h2>فريق متخصص لكل فئة أجهزة (قسم التبريد والتكييف، قسم الغسالات، قسم الغاز، قسم الإلكترونيات)</h2>
+      <div class="cards-grid-2" style="margin:1.25rem 0 2rem;">
+        <div class="info-card">
+          <h3>قسم التبريد والتكييف</h3>
+          <p>متخصصون في صيانة التكييفات، شحن الفريون، الثلاجات النوفروست، والديب فريزر.</p>
+        </div>
+        <div class="info-card">
+          <h3>قسم الغسالات والمجففات</h3>
+          <p>مهندسون لغسالات الملابس الأوتوماتيك وفوق أوتوماتيك وغسالات الأطباق وكروت الإنفرتر.</p>
+        </div>
+        <div class="info-card">
+          <h3>قسم أجهزة الغاز والحرارة</h3>
+          <p>فنيو أمان لصيانة البوتاجازات، الأفران البلت-إن، وسخانات الغاز والكهرباء والفورية.</p>
+        </div>
+        <div class="info-card">
+          <h3>قسم الإلكترونيات والشاشات</h3>
+          <p>معمل متخصص لصيانة شاشات LED/سمارت، الميكروويف، وإصلاح الكروت والبوردات.</p>
+        </div>
+      </div>
+
+      <h2>التزامنا بالمواعيد والأمان والنظافة داخل منزل العميل</h2>
+      <p>
+        يحرص فنيو أركان على الحفاظ على نظافة مكان العمل، حماية الأرضيات والمطابخ، تنفيذ اختبارات الأمان الكهربائي والغازي قبل المغادرة، وتسليم شهادة الضمان المكتوبة.
+      </p>
+
+      <h2>تغطيتنا المتنامية في القاهرة الكبرى والإسكندرية والمحافظات</h2>
+      <p>
+        نغطي يومياً <a href="/coverage/cairo" style="color:var(--accent); font-weight:700;">القاهرة والمدن الجديدة</a>، و<a href="/coverage/giza" style="color:var(--accent); font-weight:700;">الجيزة و6 أكتوبر والشيخ زايد</a>، و<a href="/coverage/alexandria" style="color:var(--accent); font-weight:700;">الإسكندرية والساحل</a>، و<a href="/coverage/egypt-governorates" style="color:var(--accent); font-weight:700;">محافظات الدلتا والقناة والصعيد</a>.
+      </p>
+
+      <div style="margin-top:1.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="/how-it-works" class="btn btn-outline-dark">كيف نعمل</a>
+        <a href="/warranty-and-parts" class="btn btn-outline-dark">سياسة الضمان</a>
+        <a href="/contact" class="btn btn-accent">احجز فني الآن</a>
+      </div>
+
+      <ConversionBanner />
+    </div>
+  </section>
+</BaseLayout>

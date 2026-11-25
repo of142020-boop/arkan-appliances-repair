@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import DisclaimerBox from '../../components/DisclaimerBox.astro';
+import { SITE, IMG_DIMS, whatsappUrl } from '../../config/site';
+import { SERVICES, type ServicePage } from '../../data/services';
+
+export function getStaticPaths() {
+  return SERVICES.map((svc) => ({
+    params: { slug: svc.slug },
+    props: { svc },
+  }));
+}
+
+interface Props {
+  svc: ServicePage;
+}
+
+const { svc } = Astro.props;
+const waHref = whatsappUrl(svc.waMessage);
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: svc.shortTitle, href: svc.url },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: svc.h1,
+    description: svc.meta,
+    serviceType: svc.shortTitle,
+    provider: { '@id': `${SITE.domain}/#localbusiness` },
+    areaServed: { '@type': 'Country', name: 'Egypt' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: svc.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={svc.title}
+  description={svc.meta}
+  canonicalPath={svc.url}
+  ogImage={svc.image}
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container inner-hero-grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a href="/">الرئيسية</a>
+          <span class="sep">/</span>
+          <span>{svc.shortTitle}</span>
+        </nav>
+        <span class="eyebrow">{svc.badge}</span>
+        <h1>{svc.h1}</h1>
+        <p>{svc.heroLead}</p>
+        <div class="hero-cta-row">
+          <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            حجز فوري واتساب
+          </a>
+          <a href={SITE.phoneHref} class="btn btn-accent">
+            اتصل: <span dir="ltr">{SITE.phoneDisplay}</span>
+          </a>
+          <a href="/contact" class="btn btn-outline-light">نموذج الحجز</a>
+        </div>
+        <div class="trust-chips">
+          <span class="trust-chip">إصلاح بالمنزل في نفس اليوم</span>
+          <span class="trust-chip">قطع غيار أصلية</span>
+          <span class="trust-chip">ضمان مكتوب 6 – 12 شهراً</span>
+          <span class="trust-chip">تسعير شفاف قبل البدء</span>
+        </div>
+      </div>
+
+      <div class="inner-hero-photo">
+        <img
+          src={svc.image}
+          alt={svc.imageAlt}
+          width={IMG_DIMS[svc.image].w}
+          height={IMG_DIMS[svc.image].h}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="prose-block">
+        {svc.sections.map((sec) => (
+          <section style="margin-bottom:2rem;">
+            <h2>{sec.heading}</h2>
+            <p>{sec.body}</p>
+            {sec.bullets && (
+              <ul>
+                {sec.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+
+        <h2>أبرز خدمات {svc.shortTitle} وفترة الضمان</h2>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>الخدمة الفنية</th>
+                <th>تفاصيل التنفيذ بالمنزل</th>
+                <th>الضمان المكتوب</th>
+              </tr>
+            </thead>
+            <tbody>
+              {svc.specRows.map((row) => (
+                <tr>
+                  <td><strong>{row.label}</strong></td>
+                  <td>{row.details}</td>
+                  <td>{row.warranty}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>الماركات التي نصلحها ضمن قسم {svc.shortTitle}</h2>
+        <div class="cards-grid-2" style="margin-bottom:2rem;">
+          {svc.relatedBrands.map((b) => (
+            <a href={b.href} class="info-card">
+              <h3 style="font-size:1.12rem; margin:0;">{b.label} ←</h3>
+            </a>
+          ))}
+        </div>
+
+        <DisclaimerBox />
+
+        <ConversionBanner
+          title={`هل تحتاج فني ${svc.shortTitle} بالمنزل اليوم؟`}
+          waMessage={svc.waMessage}
+        />
+
+        <FaqSection title={`أسئلة شائعة حول ${svc.shortTitle}`} items={svc.faqs} />
+      </article>
+
+      <aside class="sidebar-sticky">
+        <div class="sidebar-card dark">
+          <h3>حجز فني {svc.shortTitle}</h3>
+          <p style="font-size:0.88rem; color:rgba(255,255,255,0.8); margin:0 0 1.1rem;">
+            زيارة منزلية سريعة في القاهرة والجيزة والإسكندرية وجميع المحافظات مع إبلاغك بالتكلفة قبل الإصلاح.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+              حجز عبر واتساب
+            </a>
+            <a href={SITE.phoneHref} class="btn btn-accent btn-sm" dir="ltr">
+              {SITE.phoneDisplay}
+            </a>
+            <a href="/contact" class="btn btn-outline-light btn-sm">تأكيد موعد أونلاين</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>روابط وأدلة مفيدة</h3>
+          <ul class="sidebar-links">
+            {svc.relatedLinks.map((lnk) => (
+              <li><a href={lnk.href}><span>{lnk.label}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>باقي الأجهزة الـ 9</h3>
+          <ul class="sidebar-links">
+            {SERVICES.filter((x) => x.slug !== svc.slug).map((other) => (
+              <li><a href={other.url}><span>{other.shortTitle}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

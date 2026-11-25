@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import { SITE } from '../config/site';
+
+const title = 'كيف نعمل | خطوات صيانة الأجهزة المنزلية بالمنزل من الحجز حتى تسليم الضمان';
+const description =
+  'تعرف على خطوات صيانة أجهزتك المنزلية معنا بشفافية: الحجز السريع، وصول الفني بالمنزل، الفحص وإبلاغ التكلفة قبل الإصلاح، التركيب بقطع أصلية، وشهادة الضمان المكتوبة.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'كيف نعمل', href: '/how-it-works' },
+];
+
+const steps = [
+  {
+    num: '01',
+    heading: 'الخطوة 1: تواصل معنا هاتفياً أو واتساب واذكر نوع الجهاز والماركة والعطل',
+    body: 'عند اتصالك أو مراسلتك على واتساب، يسجل منسق الخدمة نوع الجهاز، الماركة، والعطل الظاهر (أو الكود على الشاشة) لتوجيه الفني المتخصص وبحوزته قطع الغيار المحتملة.',
+  },
+  {
+    num: '02',
+    heading: 'الخطوة 2: تحديد أقرب موعد زيارة في نفس اليوم مع فني متخصص في جهازك',
+    body: 'نلتزم بالموعد المحدد بدقة ونؤكد معك قبل وصول الفني، مع تغطية يومية للقاهرة الكبرى والجيزة والإسكندرية وعواصم المحافظات.',
+  },
+  {
+    num: '03',
+    heading: 'الخطوة 3: الفحص الدقيق وإبلاغك بالتكلفة النهائية قبل البدء في أي إصلاح',
+    body: 'يفحص الفني الجهاز بأجهزة القياس ويوضح لك سبب العطل والتكلفة الشاملة لقطعة الغيار الأصلية والمصنعية قبل تنفيذ أي خطوة.',
+  },
+  {
+    num: '04',
+    heading: 'الخطوة 4: الإصلاح بقطع غيار أصلية واختبار التشغيل وتسليم فاتورة وضمان مكتوب',
+    body: 'بعد إتمام الإصلاح أمامك، نختبر الجهاز دورة تشغيل فعلية، نعرض عليك القطعة التالفة، ونسلمك فاتورة وشهادة ضمان مكتوبة من 6 إلى 12 شهراً.',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'خطوات صيانة الأجهزة المنزلية بالمنزل مع أركان',
+    description,
+    step: steps.map((s) => ({ '@type': 'HowToStep', name: s.heading, text: s.body })),
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/how-it-works"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="مسار التنقل">
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <span>كيف نعمل</span>
+      </nav>
+      <span class="eyebrow">شفافية كاملة في كل خطوة</span>
+      <h1>كيف نصلح جهازك المنزلي في 4 خطوات سهلة وشفافة داخل منزلك</h1>
+      <p style="max-width:720px;">
+        نظام عمل هندسي منظم يضمن لك سرعة الاستجابة، دقة التشخيص، عدم وجود مصاريف مفاجئة، وضماناً مكتوباً على كل عملية صيانة.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cards-grid-2">
+        {steps.map((s) => (
+          <div class="info-card">
+            <span class="eyebrow" style="font-size:1.1rem;">{s.num}</span>
+            <h2 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:0.65rem;">{s.heading}</h2>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style="margin-top:2rem; display:flex; gap:0.85rem; flex-wrap:wrap;">
+        <a href="/warranty-and-parts" class="btn btn-outline-dark">اطلع على سياسة الضمان وقطع الغيار</a>
+        <a href="/services/ac-repair" class="btn btn-outline-dark">تصفح خدمات التكييفات</a>
+        <a href="/services/refrigerator-repair" class="btn btn-outline-dark">تصفح خدمات الثلاجات</a>
+        <a href="/services/washing-machine-repair" class="btn btn-outline-dark">تصفح خدمات الغسالات</a>
+      </div>
+
+      <ConversionBanner />
+    </div>
+  </section>
+</BaseLayout>

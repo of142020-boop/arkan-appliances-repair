@@ -1,0 +1,25 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface Props {
+  title?: string;
+  items: FaqItem[];
+}
+
+const { title = 'الأسئلة الشائعة', items } = Astro.props;
+---
+
+<section style="margin-top:2.75rem;">
+  <h2 class="font-display" style="font-size:1.75rem; margin-bottom:1rem;">{title}</h2>
+  <div class="faq-list">
+    {items.map((item, idx) => (
+      <details class="faq-item" open={idx === 0}>
+        <summary>{item.q}</summary>
+        <p class="faq-answer">{item.a}</p>
+      </details>
+    ))}
+  </div>
+</section>

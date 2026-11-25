@@ -1,0 +1,463 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, IMG_DIMS, FEATURED_BRAND_LINKS, whatsappUrl } from '../config/site';
+import { SERVICES } from '../data/services';
+import { COVERAGE_REGIONS } from '../data/coverage';
+import { BLOG_ARTICLES } from '../data/blog';
+
+const title = 'صيانة اجهزة منزلية في مصر بالمنزل | مركز صيانة شامل بقطع غيار أصلية وضمان';
+const description =
+  'مركز أركان المتخصص في صيانة الأجهزة المنزلية الكهربائية في جميع محافظات مصر بالمنزل: تكييفات، ثلاجات، ديب فريزر، غسالات، غسالات أطباق، بوتاجازات، سخانات، ميكروويف وشاشات بضمان حقيقي.';
+
+const homeFaqs = [
+  {
+    q: 'هل تتم صيانة الأجهزة المنزلية داخل المنزل أم يتم نقل الجهاز للورشة؟',
+    a: 'أكثر من 90% من الإصلاحات (شحن فريون التكييف والثلاجة، دائرة النوفروست، طلمبة وبلي الغسالة، سخانات وبوتاجازات وميكروويف) تتم داخل منزلك في نفس اليوم دون نقل الجهاز.',
+  },
+  {
+    q: 'هل مركز أركان توكيل رسمي للعلامات التجارية المذكورة؟',
+    a: 'نوضح بكل شفافية أن أركان مركز صيانة مستقل متخصص لصيانة الأجهزة المنزلية خارج الضمان بقطع غيار أصلية وضمان مكتوب من أركان، ولسنا توكيلاً رسمياً لأي شركة مصنّعة.',
+  },
+  {
+    q: 'ما مدة الضمان المقدمة بعد الصيانة وتغيير قطع الغيار؟',
+    a: 'تحصل على فاتورة وشهادة ضمان مكتوبة تبدأ من 6 أشهر على الصيانة وتصل إلى 12 شهراً على قطع الغيار الرئيسية المستبدلة مع متابعة مجانية حال تكرار نفس العطل.',
+  },
+  {
+    q: 'كيف يتم تحديد التكلفة؟ وهل يتم إبلاغي بالسعر قبل الإصلاح؟',
+    a: 'نعم، يقوم الفني بالفحص الدقيق أولاً ويبلغك بالتكلفة الإجمالية شاملة القطعة والمصنعية قبل البدء في أي خطوة، ولا يتم الإصلاح إلا بعد موافقتك.',
+  },
+  {
+    q: 'ما المحافظات والمدن التي تغطيها فرق أركان يومياً؟',
+    a: 'نغطي القاهرة الكبرى والمدن الجديدة (التجمع، مدينتي، الشروق، الرحاب، العبور)، الجيزة (6 أكتوبر، الشيخ زايد، الهرم، فيصل)، الإسكندرية والساحل، والدلتا والقناة والصعيد.',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.brandFullName,
+    url: SITE.domain,
+    inLanguage: 'ar-EG',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: homeFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+
+const waLink = whatsappUrl();
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/" schemas={schemas}>
+  <!-- =====================================================================
+       SECTION 1: FULL-BLEED ARCHITECTURAL HERO (Figma QQ.png)
+       ===================================================================== -->
+  <section class="hero-full">
+    <img
+      src="/images/hero-home-appliances-repair.webp"
+      alt="منزل مصري عصري مجهز بأحدث الأجهزة المنزلية الكهربائية تحت رعاية صيانة أركان"
+      width={IMG_DIMS['/images/hero-home-appliances-repair.webp'].w}
+      height={IMG_DIMS['/images/hero-home-appliances-repair.webp'].h}
+      fetchpriority="high"
+      decoding="async"
+      class="hero-bg"
+    />
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="container hero-content">
+      <span class="eyebrow">ARKAN HOME APPLIANCE CARE • مصر</span>
+      <h1 class="hero-title">مركز صيانة الأجهزة المنزلية الكهربائية في مصر — إصلاح فوري بالمنزل بضمان مكتوب</h1>
+      <p class="hero-desc">
+        مهندسون متخصصون في صيانة التكييفات، الثلاجات، الديب فريزر، الغسالات، غسالات الأطباق، البوتاجازات، السخانات، الميكروويف، والشاشات بقطع غيار أصلية داخل منزلك في جميع المحافظات.
+      </p>
+      <div class="hero-cta-row">
+        <a href="/contact" class="btn btn-white">احجز فني بالمنزل الآن</a>
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+          تواصل فوري واتساب
+        </a>
+        <a href={SITE.phoneHref} class="btn btn-outline-light" dir="ltr">
+          {SITE.phoneDisplay}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-strip">
+      <div class="container hero-strip-inner">
+        <span class="hero-strip-item">
+          <span class="hero-strip-dot"></span>
+          <a href={SITE.phoneHref} dir="ltr" style="font-weight:700;">{SITE.phoneDisplay}</a>
+        </span>
+        <span class="hero-strip-item">
+          <span class="hero-strip-dot"></span>
+          <span dir="ltr">{SITE.email}</span>
+        </span>
+        <span class="hero-strip-item">
+          <span class="hero-strip-dot"></span>
+          <span>{SITE.locationLabel}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 2: ASYMMETRIC 3-COLUMN EDITORIAL INTRO (Figma RR.png)
+       ===================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="editorial-intro-grid">
+        <div>
+          <span class="eyebrow">معيار هندسي مختلف</span>
+          <h2 class="editorial-left-title">صيانة منزلية موثوقة تغطي جميع محافظات مصر</h2>
+          <div class="editorial-wireframe">
+            <div class="editorial-wireframe-stat">
+              <span>الأجهزة المغطاة</span>
+              <strong>9 أجهزة منزلية أساسية</strong>
+            </div>
+            <div class="editorial-wireframe-stat">
+              <span>الماركات المخدومة</span>
+              <strong>+35 ماركة مصرية وعالمية</strong>
+            </div>
+            <div class="editorial-wireframe-stat">
+              <span>الإصلاح بالمنزل</span>
+              <strong>+90% في نفس الزيارة</strong>
+            </div>
+            <div class="editorial-wireframe-stat">
+              <span>شهادة الضمان</span>
+              <strong>6 إلى 12 شهراً مكتوباً</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-photo-frame">
+          <img
+            src="/images/editorial-technician-care.webp"
+            alt="مهندس صيانة أركان يفحص دائرة جهاز منزلي بأجهزة القياس الدقيقة داخل المنزل"
+            width={IMG_DIMS['/images/editorial-technician-care.webp'].w}
+            height={IMG_DIMS['/images/editorial-technician-care.webp'].h}
+            loading="lazy"
+          />
+        </div>
+
+        <div>
+          <h3 class="editorial-right-sub">دقة في التشخيص. شفافية في السعر. ضمان حقيقي.</h3>
+          <p style="color:var(--ink-secondary); margin:0 0 1.4rem;">
+            في <strong>أركان</strong> لا نعتمد على التخمين؛ يصل إليك فني متخصص في نوع جهازك مزوّداً بأجهزة فحص إلكترونية وقطع غيار أصلية، يحدد العطل بدقة ويبلغك بالتكلفة الكاملة قبل البدء في أي خطوة، مع تسليم القطعة التالفة وشهادة ضمان مكتوبة.
+          </p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="/how-it-works" class="btn btn-accent">كيف نعمل في 4 خطوات</a>
+            <a href="/warranty-and-parts" class="btn btn-outline-dark">سياسة الضمان</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 3: 9 APPLIANCE SERVICE PILLARS (3×3 Tall Figma Cards)
+       ===================================================================== -->
+  <section class="section section-soft" id="services">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">الأجهزة المنزلية التسعة التي نصلحها بالمنزل</span>
+        <h2 class="section-title">معيار أعلى لصيانة الأجهزة المنزلية الكهربائية</h2>
+        <p class="section-lead">
+          لكل فئة أجهزة قسم فني مستقل بمهندسين متخصصين وقطع غيار أصلية لضمان إصلاح دقيق من أول زيارة في جميع محافظات مصر.
+        </p>
+        <div style="margin-top:1.5rem;">
+          <a href="/contact" class="btn btn-accent">اطلب فني متخصص الآن</a>
+        </div>
+      </div>
+
+      <div class="services-photo-grid">
+        {SERVICES.map((svc) => (
+          <a href={svc.url} class="service-photo-card">
+            <img
+              src={svc.image}
+              alt={svc.imageAlt}
+              width={IMG_DIMS[svc.image].w}
+              height={IMG_DIMS[svc.image].h}
+              loading="lazy"
+            />
+            <div class="service-photo-scrim" aria-hidden="true"></div>
+            <div class="service-photo-body">
+              <span class="service-photo-badge">{svc.badge}</span>
+              <h3>{svc.shortTitle}</h3>
+              <p>{svc.cardSummary}</p>
+              <span class="service-photo-link">تفاصيل الصيانة ←</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 4: DARK ATMOSPHERIC FEATURE BAND + BRANDS STRIP (Figma RR.png)
+       ===================================================================== -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="dark-band-grid">
+        <div>
+          <span class="eyebrow">صيانة متخصصة لجميع العلامات التجارية</span>
+          <h2 class="section-title">منهج احترافي لصيانة أجهزتك داخل المنزل بدون نقل</h2>
+          <p class="section-lead" style="margin-bottom:1.5rem;">
+            سواء كان جهازك كريازي، توشيبا، إل جي، زانوسي، فريش، كاريير، شارب، سامسونج، وايت ويل، يونيفرسال، أريستون أو بيكو — نمتلك المهندس المتخصص وقطعة الغيار الأصلية المطابقة لموديل جهازك.
+          </p>
+          <p style="font-size:0.86rem; color:rgba(255,255,255,0.68); margin:0 0 1.75rem;">
+            {SITE.disclaimerShort}
+          </p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="/brands" class="btn btn-white">تصفح دليل كل الماركات (+35)</a>
+            <a href="/blog/appliance-maintenance-prices-egypt" class="btn btn-outline-light">
+              دليل الأسعار 2026
+            </a>
+          </div>
+        </div>
+
+        <div class="dark-staggered-photos">
+          <div class="dark-photo-card small">
+            <img
+              src="/images/service-fridge-freezer.webp"
+              alt="صيانة ثلاجات وديب فريزر بقطع غيار أصلية"
+              width={IMG_DIMS['/images/service-fridge-freezer.webp'].w}
+              height={IMG_DIMS['/images/service-fridge-freezer.webp'].h}
+              loading="lazy"
+            />
+          </div>
+          <div class="dark-photo-card tall">
+            <img
+              src="/images/service-washer-dishwasher.webp"
+              alt="صيانة الغسالات الأوتوماتيك وغسالات الأطباق بالمنزل"
+              width={IMG_DIMS['/images/service-washer-dishwasher.webp'].w}
+              height={IMG_DIMS['/images/service-washer-dishwasher.webp'].h}
+              loading="lazy"
+            />
+            <div class="dark-photo-cta-float">
+              <a href="/contact" class="btn btn-white btn-sm" style="width:100%;">
+                احجز موعد زيارة اليوم
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brands-strip-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <h3 class="font-display" style="font-size:1.5rem; margin:0;">
+            أشهر الماركات المصرية والعالمية التي نخدمها
+          </h3>
+          <a href="/brands" style="color:#ff946c; font-weight:700; font-size:0.9rem;">
+            عرض جميع الماركات (16 صفحة متخصصة) ←
+          </a>
+        </div>
+
+        <div class="brands-strip-grid">
+          {FEATURED_BRAND_LINKS.map((b) => (
+            <a href={b.href} class="brand-pill-link">
+              <span class="brand-pill-ar">{b.label}</span>
+              <span class="brand-pill-en">{b.en}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 5: 3-COLUMN TRANSPARENT SERVICE PLANS (Figma RR.png)
+       ===================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">شفافية كاملة بدون مفاجآت</span>
+        <h2 class="section-title">خطوات واضحة للفحص والإصلاح والضمان</h2>
+        <p class="section-lead">
+          سواء كنت تحتاج فحصاً تشخيصياً سريعاً، إصلاحاً شاملاً بقطع غيار أصلية، أو صيانة وقائية موسمية — كل شيء مُعلن بوضوح قبل البدء.
+        </p>
+      </div>
+
+      <div class="plans-grid">
+        <div class="plan-card">
+          <span class="plan-kicker">الخطوة الأولى</span>
+          <h3>الفحص والتشخيص المنزلي</h3>
+          <div class="plan-price">تسعير واضح قبل الإصلاح</div>
+          <a href="/contact" class="btn btn-outline-dark btn-sm">احجز فحص فني</a>
+          <ul class="plan-list">
+            <li>فحص شامل بالجهاز المخصص (أمبير، ضغط فريون، أفوميتر)</li>
+            <li>تحديد السبب الجذري للعطل دون تخمين</li>
+            <li>إبلاغك بالتكلفة النهائية قبل استبدال أي قطعة</li>
+            <li>رسوم الكشف تُخصم عند تنفيذ الإصلاح</li>
+          </ul>
+        </div>
+
+        <div class="plan-card featured">
+          <span class="plan-kicker">الأكثر طلباً</span>
+          <h3>الإصلاح الشامل بقطع أصلية</h3>
+          <div class="plan-price">ضمان مكتوب 6 – 12 شهراً</div>
+          <a href="/contact" class="btn btn-white btn-sm">اطلب صيانة فورية الآن</a>
+          <ul class="plan-list">
+            <li>إصلاح كامل بالمنزل في نفس الزيارة لأغلب الأعطال</li>
+            <li>قطع غيار أصلية مطابقة لموديل جهازك</li>
+            <li>عرض القطعة التالفة وتسليمها للعميل للشفافية</li>
+            <li>اختبار تشغيل فعلي كامل قبل مغادرة الفني</li>
+            <li>فاتورة وشهادة ضمان مكتوبة ومتابعة مجانية</li>
+          </ul>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-kicker">حماية وتوفير كهرباء</span>
+          <h3>باقة الصيانة الوقائية الموسمية</h3>
+          <div class="plan-price">قبل الصيف والشتاء</div>
+          <a href="/blog/preventive-home-appliances-maintenance" class="btn btn-outline-dark btn-sm">
+            تفاصيل الباقة الوقائية
+          </a>
+          <ul class="plan-list">
+            <li>غسيل وتنظيف شامل للتكييفات وفحص ضغط الفريون</li>
+            <li>تنظيف مكثف الثلاجة وفحص كاوتش الباب</li>
+            <li>اختبار أمان سخان الغاز والبوتاجاز قبل الشتاء</li>
+            <li>خفض فاتورة الكهرباء ومنع الأعطال المفاجئة</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 6: EGYPT REGIONAL COVERAGE STRIP (Figma RR.png Right Top)
+       ===================================================================== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="coverage-header-row">
+        <div>
+          <span class="eyebrow">تغطية شاملة لجمهورية مصر العربية</span>
+          <h2 class="section-title" style="margin-bottom:0;">
+            نغطي القاهرة والجيزة والإسكندرية وجميع المحافظات
+          </h2>
+        </div>
+        <a href="/coverage/egypt-governorates" class="btn btn-accent">عرض جميع المحافظات</a>
+      </div>
+
+      <div class="coverage-photo-grid">
+        {COVERAGE_REGIONS.map((reg) => (
+          <a href={reg.url} class="coverage-card">
+            <img
+              src={reg.image}
+              alt={reg.imageAlt}
+              width={IMG_DIMS[reg.image].w}
+              height={IMG_DIMS[reg.image].h}
+              loading="lazy"
+            />
+            <div class="coverage-card-scrim" aria-hidden="true"></div>
+            <div class="coverage-card-body">
+              <h3>{reg.regionName}</h3>
+              <p>{reg.cardSummary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 7: ASYMMETRIC FAQ + DUAL PHOTOS (Figma RR.png Right Middle)
+       ===================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="faq-split-grid">
+        <div>
+          <span class="eyebrow">إجابات واضحة وشفافة</span>
+          <h2 class="section-title">رعاية كاملة لكل جهاز في منزلك</h2>
+          <div class="faq-list">
+            {homeFaqs.map((item, idx) => (
+              <details class="faq-item" open={idx === 0}>
+                <summary>{item.q}</summary>
+                <p class="faq-answer">{item.a}</p>
+              </details>
+            ))}
+          </div>
+          <div style="margin-top:1.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="/contact" class="btn btn-accent">تواصل معنا الآن</a>
+            <a href="/blog" class="btn btn-outline-dark">تصفح أدلة الأعطال والأسعار</a>
+          </div>
+        </div>
+
+        <div class="faq-dual-photos">
+          <img
+            src="/images/service-cooker-heater.webp"
+            alt="صيانة البوتاجازات والأفران والسخانات بالمنزل"
+            width={IMG_DIMS['/images/service-cooker-heater.webp'].w}
+            height={IMG_DIMS['/images/service-cooker-heater.webp'].h}
+            loading="lazy"
+            class="faq-photo-inset"
+          />
+          <img
+            src="/images/service-tv-microwave.webp"
+            alt="صيانة شاشات التلفزيون والميكروويف في مصر"
+            width={IMG_DIMS['/images/service-tv-microwave.webp'].w}
+            height={IMG_DIMS['/images/service-tv-microwave.webp'].h}
+            loading="lazy"
+            class="faq-photo-main"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       LATEST DIAGNOSTIC & PRICING GUIDES STRIP
+       ===================================================================== -->
+  <section class="section section-warm">
+    <div class="container">
+      <div class="coverage-header-row">
+        <div>
+          <span class="eyebrow">أدلة أركان الفنية والأسعار 2026</span>
+          <h2 class="section-title" style="margin-bottom:0;">أشهر أدلة الأعطال وأكواد الأخطاء وأسعار الصيانة</h2>
+        </div>
+        <a href="/blog" class="btn btn-outline-dark">عرض الـ 12 دليلاً كاملاً</a>
+      </div>
+      <div class="cards-grid-3">
+        {BLOG_ARTICLES.slice(0, 6).map((art) => (
+          <a href={art.url} class="info-card">
+            <span class="eyebrow" style="margin-bottom:0.35rem;">{art.category}</span>
+            <h3>{art.h1}</h3>
+            <p>{art.excerpt}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 8: PRE-FOOTER PHOTO COLLAGE CTA (Figma SS.png Right)
+       ===================================================================== -->
+  <section class="section collage-cta-wrap">
+    <div class="container">
+      <span class="eyebrow">استجابة سريعة طوال أيام الأسبوع</span>
+      <h2 class="section-title">جهازك يحتاج فحصاً أو صيانة فورية بالمنزل؟</h2>
+      <p class="section-lead" style="margin-inline:auto; margin-bottom:1.65rem;">
+        احجز الآن عبر الهاتف أو واتساب ليصلك مهندس أركان المتخصص في نفس اليوم مع فاتورة وضمان مكتوب.
+      </p>
+      <div style="display:flex; justify-content:center; gap:0.85rem; flex-wrap:wrap;">
+        <a href="/contact" class="btn btn-accent">احجز فني صيانة الآن</a>
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          تواصل واتساب فوري
+        </a>
+        <a href={SITE.phoneHref} class="btn btn-outline-dark" dir="ltr">{SITE.phoneDisplay}</a>
+      </div>
+
+      <div class="collage-strip">
+        <img src="/images/service-ac-repair.webp" alt="صيانة تكييفات" width="896" height="1200" loading="lazy" />
+        <img src="/images/service-fridge-freezer.webp" alt="صيانة ثلاجات وديب فريزر" width="896" height="1200" loading="lazy" />
+        <img src="/images/service-washer-dishwasher.webp" alt="صيانة غسالات" width="896" height="1200" loading="lazy" />
+        <img src="/images/service-cooker-heater.webp" alt="صيانة بوتاجازات وسخانات" width="896" height="1200" loading="lazy" />
+        <img src="/images/service-tv-microwave.webp" alt="صيانة شاشات وميكروويف" width="896" height="1200" loading="lazy" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

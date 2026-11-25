@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { BLOG_ARTICLES } from '../../data/blog';
+import { IMG_DIMS } from '../../config/site';
+
+const title = 'مدونة أركان | أدلة أعطال الأجهزة المنزلية وأكواد الأخطاء وأسعار الصيانة في مصر 2026';
+const description =
+  '12 دليلاً فنياً عملياً لأعطال التكييفات، الثلاجات النوفروست، الديب فريزر، الغسالات، غسالات الأطباق، البوتاجازات، السخانات، الميكروويف والشاشات مع جداول أكواد وأسعار قطع الغيار في مصر.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'المدونة وأدلة الأعطال والأسعار', href: '/blog' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/blog"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="inner-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="مسار التنقل">
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <span>المدونة وأدلة الأعطال والأسعار</span>
+      </nav>
+      <span class="eyebrow">مكتبة أركان الهندسية • 12 دليلاً شاملاً</span>
+      <h1>أدلة أعطال الأجهزة المنزلية وأكواد الأخطاء وأسعار الصيانة في مصر 2026</h1>
+      <p style="max-width:760px;">
+        تشخيص عملي لأشهر أعطال الأجهزة الـ 9، جداول رموز الأعطال لكل ماركة، ومتوسط أسعار الصيانة وقطع الغيار الأصلية في السوق المصري بشفافية كاملة.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cards-grid-3">
+        {BLOG_ARTICLES.map((art) => (
+          <a href={art.url} class="info-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column;">
+            <img
+              src={art.image}
+              alt={art.imageAlt}
+              width={IMG_DIMS[art.image].w}
+              height={IMG_DIMS[art.image].h}
+              loading="lazy"
+              style="width:100%; aspect-ratio:16/10; object-fit:cover;"
+            />
+            <div style="padding:1.35rem; flex:1; display:flex; flex-direction:column;">
+              <span class="eyebrow" style="margin-bottom:0.35rem;">{art.category} • {art.readTime}</span>
+              <h2 style="font-family:var(--font-display); font-size:1.3rem; margin-bottom:0.5rem;">
+                {art.h1}
+              </h2>
+              <p style="flex:1; margin-bottom:0.85rem;">{art.excerpt}</p>
+              <span style="color:var(--accent); font-weight:700; font-size:0.86rem;">اقرأ الدليل الكامل ←</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <ConversionBanner />
+    </div>
+  </section>
+</BaseLayout>

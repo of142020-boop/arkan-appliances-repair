@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arkan-appliances-repair.vercel.app/sitemap-index.xml

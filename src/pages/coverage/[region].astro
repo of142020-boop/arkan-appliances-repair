@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import { SITE, IMG_DIMS, whatsappUrl } from '../../config/site';
+import { COVERAGE_REGIONS, type CoveragePage } from '../../data/coverage';
+
+export function getStaticPaths() {
+  return COVERAGE_REGIONS.map((region) => ({
+    params: { region: region.slug },
+    props: { region },
+  }));
+}
+
+interface Props {
+  region: CoveragePage;
+}
+
+const { region } = Astro.props;
+const waHref = whatsappUrl(region.waMessage);
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'التغطية الجغرافية', href: '/coverage/egypt-governorates' },
+  { label: region.regionName, href: region.url },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: region.h1,
+    description: region.meta,
+    provider: { '@id': `${SITE.domain}/#localbusiness` },
+    areaServed: region.regionName,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: region.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={region.title}
+  description={region.meta}
+  canonicalPath={region.url}
+  ogImage={region.image}
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container inner-hero-grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="مسار التنقل">
+          <a href="/">الرئيسية</a>
+          <span class="sep">/</span>
+          <span>تغطية {region.regionName}</span>
+        </nav>
+        <span class="eyebrow">زمن الوصول: {region.responseTime}</span>
+        <h1>{region.h1}</h1>
+        <p>{region.heroLead}</p>
+        <div class="hero-cta-row">
+          <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            حجز فني في {region.regionName}
+          </a>
+          <a href={SITE.phoneHref} class="btn btn-accent">
+            اتصل: <span dir="ltr">{SITE.phoneDisplay}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="inner-hero-photo">
+        <img
+          src={region.image}
+          alt={region.imageAlt}
+          width={IMG_DIMS[region.image].w}
+          height={IMG_DIMS[region.image].h}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="prose-block">
+        <h2>المناطق والأحياء المغطاة يومياً في {region.regionName}</h2>
+        <div class="cards-grid-2" style="margin:1.25rem 0 2rem;">
+          {region.districtsGroups.map((grp) => (
+            <div class="info-card">
+              <h3>{grp.title}</h3>
+              <ul style="margin:0.5rem 0 0; padding-inline-start:1.15rem; font-size:0.9rem; color:var(--ink-secondary);">
+                {grp.areas.map((a) => (
+                  <li>{a}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <h2>لماذا تختار أركان لصيانة أجهزتك في {region.regionName}؟</h2>
+        <ul>
+          {region.highlights.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+
+        <ConversionBanner
+          title={`احجز أقرب فني صيانة في ${region.regionName} الآن`}
+          waMessage={region.waMessage}
+        />
+
+        <FaqSection title={`أسئلة شائعة عن الخدمة في ${region.regionName}`} items={region.faqs} />
+      </article>
+
+      <aside class="sidebar-sticky">
+        <div class="sidebar-card dark">
+          <h3>طلب فني في {region.regionName}</h3>
+          <p style="font-size:0.86rem; color:rgba(255,255,255,0.8); margin:0 0 1rem;">
+            {region.responseTime}
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+              حجز واتساب
+            </a>
+            <a href={SITE.phoneHref} class="btn btn-accent btn-sm" dir="ltr">{SITE.phoneDisplay}</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>أقاليم مصر الأخرى</h3>
+          <ul class="sidebar-links">
+            {COVERAGE_REGIONS.filter((x) => x.slug !== region.slug).map((other) => (
+              <li><a href={other.url}><span>{other.regionName}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>خدمات وماركات رئيسية</h3>
+          <ul class="sidebar-links">
+            {region.relatedLinks.map((lnk) => (
+              <li><a href={lnk.href}><span>{lnk.label}</span><span>←</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

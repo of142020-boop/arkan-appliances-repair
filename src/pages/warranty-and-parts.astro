@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import FaqSection from '../components/FaqSection.astro';
+import DisclaimerBox from '../components/DisclaimerBox.astro';
+import { SITE } from '../config/site';
+
+const title = 'الضمان وقطع الغيار الأصلية | سياسة الصيانة الشفافة وميثاق الخدمة في مصر';
+const description =
+  'تعرف على شروط الضمان المكتوب (من 6 إلى 12 شهراً) على قطع الغيار المستبدلة وأعمال الصيانة، ومعاييرنا في الشفافية والاستقلالية الكاملة عن التوكيلات الرسمية.';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'الضمان وقطع الغيار الأصلية', href: '/warranty-and-parts' },
+];
+
+const faqs = [
+  {
+    q: 'ماذا يشمل الضمان المكتوب المقدم من مركز أركان؟',
+    a: 'يشمل الضمان أي عطل متكرر في نفس قطعة الغيار المستبدلة أو نفس المصنعية خلال مدة الضمان الموضحة بالفاتورة (6 إلى 12 شهراً) دون تكلفة إضافية على العميل.',
+  },
+  {
+    q: 'ما الحالات التي لا يشملها الضمان؟',
+    a: 'سوء الاستخدام، الكسر الفيزيائي، الأعطال الناتجة عن ارتفاع مفاجئ في الجهد الكهربائي (قصر الدائرة)، أو فتح الجهاز بواسطة جهة أخرى خلال فترة الضمان.',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: `${SITE.domain}/warranty-and-parts`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/warranty-and-parts"
+  solidHeader={true}
+  breadcrumbs={breadcrumbs}
+  schemas={schemas}
+>
+  <section class="inner-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="مسار التنقل">
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <span>الضمان وقطع الغيار</span>
+      </nav>
+      <span class="eyebrow">ميثاق الشفافية وحقوق العميل</span>
+      <h1>ضمان الصيانة وقطع الغيار الأصلية — ميثاق الشفافية وحقوق العميل</h1>
+      <p style="max-width:740px;">
+        نؤمن بأن ثقة العميل تبدأ بالوضوح التام: شهادة ضمان مكتوبة، قطع غيار أصلية مطابقة للموديل، وإقرار صريح باستقلاليتنا الكاملة.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-block" style="max-width:920px;">
+      <DisclaimerBox />
+
+      <h2>تفاصيل شهادة الضمان المكتوبة على قطع الغيار والمصنعية (6 إلى 12 شهراً)</h2>
+      <p>
+        يُسلّم الفني عقب كل عملية إصلاح فاتورة مختومة موضحاً بها: تاريخ الزيارة، نوع الجهاز والماركة، تفاصيل القطعة المستبدلة، السعر المدفوع، ومدة الضمان المحددة (6 أشهر لأعمال الشحن والإصلاحات الفرعية، وحتى 12 شهراً للمكونات الرئيسية كالكباس والموتور والماجنترون وطقم الليدات ورمان البلي).
+      </p>
+
+      <h2>كيف نضمن جودة قطع الغيار الأصلية ونعرض القطعة التالفة على العميل؟</h2>
+      <p>
+        قبل تركيب أي قطعة جديدة يعرضها الفني عليك في عبوتها ويوضح لك الفرق بينها وبين القطعة التالفة، كما يحتفظ العميل بالقطعة القديمة كضمان كامل للشفافية وعدم تركيب أي قطعة مستعملة أو مقلدة.
+      </p>
+
+      <h2>توضيح شفاف: مركز صيانة مستقل متخصص للأجهزة خارج الضمان (ولسنا توكيلاً رسمياً)</h2>
+      <p>
+        يعمل مركز <strong>أركان</strong> بصفته مركز صيانة مستقل متخصص في إصلاح الأجهزة المنزلية خارج فترة ضمان المصنع في مصر. نحن لا ننتحل صفة أي توكيل رسمي أو خط ساخن تابع للشركات المصنّعة، ونذكر أسماء الماركات حصراً لتعريف العملاء بالأجهزة التي يمتلك مهندسونا خبرة وقطع غيار لصيانتها.
+      </p>
+
+      <h2>سياسة المراجعة المجانية حال تكرار نفس العطل خلال فترة الضمان</h2>
+      <p>
+        إذا تكرر نفس العطل أو ظهر خلل في القطعة المستبدلة خلال مدة الضمان، يكفي التواصل معنا برقم الفاتورة لنرسل لك الفني للمراجعة والإصلاح المجاني فوراً.
+      </p>
+
+      <div style="margin-top:1.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="/how-it-works" class="btn btn-outline-dark">كيف نعمل</a>
+        <a href="/brands" class="btn btn-outline-dark">دليل الماركات</a>
+        <a href="/about" class="btn btn-outline-dark">من نحن</a>
+      </div>
+
+      <FaqSection items={faqs} />
+      <ConversionBanner />
+    </div>
+  </section>
+</BaseLayout>

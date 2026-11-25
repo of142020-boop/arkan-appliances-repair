@@ -1,0 +1,33 @@
+---
+import { SITE, whatsappUrl } from '../config/site';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  waMessage?: string;
+}
+
+const {
+  title = 'هل يحتاج جهازك فحصاً أو صيانة فورية بالمنزل؟',
+  subtitle = 'تواصل مع أركان الآن لتحديد موعد زيارة في نفس اليوم مع إبلاغك بالتكلفة قبل البدء في الإصلاح وضمان مكتوب من 6 إلى 12 شهراً.',
+  waMessage,
+} = Astro.props;
+
+const waHref = whatsappUrl(waMessage);
+---
+
+<div class="cta-banner">
+  <div>
+    <h3>{title}</h3>
+    <p>{subtitle}</p>
+  </div>
+  <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+    <a href={waHref} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+      حجز عبر واتساب
+    </a>
+    <a href={SITE.phoneHref} class="btn btn-accent">
+      اتصل: <span dir="ltr">{SITE.phoneDisplay}</span>
+    </a>
+    <a href="/contact" class="btn btn-outline-light">نموذج الحجز</a>
+  </div>
+</div>

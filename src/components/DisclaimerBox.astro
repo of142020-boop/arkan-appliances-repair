@@ -1,0 +1,20 @@
+---
+import { SITE } from '../config/site';
+
+export interface Props {
+  brandNameAr?: string;
+}
+
+const { brandNameAr } = Astro.props;
+---
+
+<aside class="disclaimer-box" aria-label="إقرار الشفافية والاستقلالية">
+  <strong>توضيح مهم للشفافية:</strong>{' '}
+  {brandNameAr
+    ? `مركز أركان هو مركز صيانة مستقل متخصص في إصلاح أجهزة ${brandNameAr} خارج الضمان بقطع غيار أصلية وضمان مكتوب من أركان، ولسنا توكيلاً رسمياً أو جهة تابعة للشركة المصنّعة.`
+    : SITE.disclaimerShort}
+  {' '}
+  <a href="/warranty-and-parts" style="color:var(--accent); font-weight:700; text-decoration:underline;">
+    اطلع على سياسة الضمان والشفافية
+  </a>
+</aside>
