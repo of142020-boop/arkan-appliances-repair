@@ -33,7 +33,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة كريازي (Kiriazi) بالمنزل في مصر — ثلاجات، ديب فريزر، غسالات وبوتاجازات',
     heroLead:
       'صيانة متخصصة لجميع أجهزة كريازي المنزلية خارج الضمان بالمنزل في القاهرة والجيزة والإسكندرية والدلتا والقناة والصعيد، مع توفر كامل لقطع غيار ثلاجات وديب فريزر كريازي الأصلية.',
-    image: '/images/service-fridge-freezer.webp',
+    image: '/images/service-fridge-repair.webp',
     imageAlt: 'صيانة ثلاجات وديب فريزر كريازي بالمنزل بقطع غيار أصلية في مصر',
     appliancesCovered: [
       { name: 'ثلاجات كريازي النوفروست والديفروست', details: 'إصلاح ضعف التبريد، الفريزر يعمل والثلاجة لا، تغيير سخان النوفروست والثرموديسك والتايمر والموتور وشحن الفريون.', serviceHref: '/services/refrigerator-repair' },
@@ -70,7 +70,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة توشيبا (Toshiba) المنزلية بالمنزل في مصر بقطع غيار أصلية',
     heroLead:
       'فنيون متخصصون في صيانة أجهزة توشيبا المنزلية خارج الضمان داخل منزلك في مصر: ثلاجات نوفروست، ديب فريزر، غسالات فوق أوتوماتيك وهاف، وشاشات توشيبا بضمان مكتوب.',
-    image: '/images/service-fridge-freezer.webp',
+    image: '/images/service-fridge-repair.webp',
     imageAlt: 'صيانة ثلاجات وغسالات وديب فريزر توشيبا بالمنزل في مصر',
     appliancesCovered: [
       { name: 'ثلاجات توشيبا النوفروست (14، 16، 18 قدم)', details: 'حل مشكلة توقف التبريد السفلي، تغيير التايمر والسخان والمروحة وكاوتش الباب وشحن الفريون الأصلي.', serviceHref: '/services/refrigerator-repair' },
@@ -108,7 +108,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة إل جي (LG) المنزلية بالمنزل في مصر — غسالات، ثلاجات، شاشات وتكييفات',
     heroLead:
       'مهندسون مدربون على تكنولوجيا Inverter وDirect Drive في أجهزة إل جي المنزلية: غسالات، ثلاجات، شاشات سمارت، تكييفات، ميكروويف وغسالات أطباق بالمنزل بضمان.',
-    image: '/images/service-washer-dishwasher.webp',
+    image: '/images/service-washer-repair.webp',
     imageAlt: 'صيانة غسالات وثلاجات وشاشات إل جي LG المنزلية في مصر',
     appliancesCovered: [
       { name: 'غسالات LG دايركت درايف وإنفرتر', details: 'معالجة أكواد OE، UE، LE، DE، IE، PE، وتغيير طلمبة الصرف ورمان البلي ولوك الباب وإصلاح الكارتة.', serviceHref: '/services/washing-machine-repair' },
@@ -147,7 +147,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة وايت ويل (White Whale) بالمنزل في مصر بضمان مكتوب',
     heroLead:
       'صيانة شاملة لأجهزة وايت ويل المنزلية داخل منزلك في جميع محافظات مصر بمهندسين متخصصين في ثلاجات وغسالات وديب فريزر وغسالات أطباق وتكييفات وايت ويل.',
-    image: '/images/service-fridge-freezer.webp',
+    image: '/images/service-fridge-repair.webp',
     imageAlt: 'صيانة ثلاجات وغسالات وايت ويل بالمنزل في مصر',
     appliancesCovered: [
       { name: 'ثلاجات وديب فريزر وايت ويل', details: 'إصلاح أعطال التبريد، لوحة التحكم الديجيتال، سخان النوفروست، المروحة، وشحن الفريون.', serviceHref: '/services/refrigerator-repair' },
@@ -181,7 +181,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة زانوسي وإيديال زانوسي (Zanussi) بالمنزل في مصر',
     heroLead:
       'خبرة عميقة في صيانة غسالات زانوسي وإيديال زانوسي (العبد، أكواتك، بيرلا، ستيم ماكس) وثلاجات وبوتاجازات وسخانات زانوسي بالمنزل بقطع غيار أصلية وضمان مكتوب.',
-    image: '/images/service-washer-dishwasher.webp',
+    image: '/images/service-washer-repair.webp',
     imageAlt: 'صيانة غسالات زانوسي وإيديال زانوسي الأوتوماتيك في مصر',
     appliancesCovered: [
       { name: 'غسالات زانوسي وإيديال زانوسي الأوتوماتيك', details: 'معالجة أكواد E10، E20، E40، وتغيير البلي، المساعدين، الطلمبة، لوك الباب، الكاوتش، وإصلاح الكارتة.', serviceHref: '/services/washing-machine-repair' },
@@ -217,7 +217,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة فريش (Fresh) المنزلية بالمنزل في مصر بقطع غيار أصلية',
     heroLead:
       'صيانة شاملة لجميع أجهزة فريش الكهربائية والغازية داخل منزلك بقطع غيار أصلية وضمان مكتوب في القاهرة والجيزة والإسكندرية وجميع المحافظات.',
-    image: '/images/service-cooker-heater.webp',
+    image: '/images/service-cooker-repair.webp',
     imageAlt: 'صيانة أجهزة فريش المنزلية بالمنزل في مصر',
     appliancesCovered: [
       { name: 'تكييفات فريش (تيربو، بلازما، إنفرتر)', details: 'شحن فريون أصلي، غسيل شامل، علاج أكواد الأعطال وتغيير الكباستور والسنسورات والكارتة.', serviceHref: '/services/ac-repair' },
@@ -252,7 +252,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة يونيفرسال (Universal) بالمنزل في مصر — بوتاجازات، سخانات وغسالات',
     heroLead:
       'فنيون متخصصون في صيانة بوتاجازات وسخانات يونيفرسال (الغاز 6 و10 لتر والكهرباء) وغسالات وثلاجات يونيفرسال داخل المنزل بأعلى معايير الأمان وضمان مكتوب.',
-    image: '/images/service-cooker-heater.webp',
+    image: '/images/service-cooker-repair.webp',
     imageAlt: 'صيانة بوتاجازات وسخانات يونيفرسال الغاز والكهرباء في مصر',
     appliancesCovered: [
       { name: 'بوتاجازات يونيفرسال (4 و5 شعلة وبلت-إن)', details: 'إصلاح الإشعال الذاتي، تسليك العيون وتغيير الفواني، إصلاح فرن البوتاجاز، تغيير المفصلات والزجاج.', serviceHref: '/services/cooker-oven-repair' },
@@ -321,7 +321,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة وايت بوينت (White Point) بالمنزل في مصر بقطع غيار أصلية',
     heroLead:
       'صيانة منزلية فورية لجميع أجهزة وايت بوينت في مصر (غسالات ملابس، غسالات أطباق 10 إلى 14 فرداً، ثلاجات وديب فريزر وبوتاجازات) بقطع أصلية وضمان مكتوب.',
-    image: '/images/service-washer-dishwasher.webp',
+    image: '/images/service-washer-repair.webp',
     imageAlt: 'صيانة غسالات وغسالات أطباق وايت بوينت بالمنزل في مصر',
     appliancesCovered: [
       { name: 'غسالات وايت بوينت أوتوماتيك وفوق أوتوماتيك', details: 'تغيير البلي والمساعدين والطلمبة وإصلاح الكارتة ولوك الباب وعلاج أعطال العصر.', serviceHref: '/services/washing-machine-repair' },
@@ -355,7 +355,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة سامسونج (Samsung) المنزلية بالمنزل في مصر — غسالات، ثلاجات وشاشات',
     heroLead:
       'صيانة متخصصة لأجهزة سامسونج المنزلية الكبيرة (غسالات، ثلاجات، شاشات تلفزيون، ميكروويف وتكييفات) بالمنزل في مصر بقطع غيار أصلية وضمان مكتوب.',
-    image: '/images/service-tv-microwave.webp',
+    image: '/images/service-tv-repair.webp',
     imageAlt: 'صيانة غسالات وثلاجات وشاشات سامسونج المنزلية في مصر',
     appliancesCovered: [
       { name: 'غسالات سامسونج إيكو بابل وفوق أوتوماتيك', details: 'معالجة أكواد 4E/4C، 5E/5C، UE/UB، dE، SE، وتغيير رمان البلي والطلمبة والكارتة.', serviceHref: '/services/washing-machine-repair' },
@@ -427,7 +427,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة بيكو (Beko) المنزلية بالمنزل في مصر بقطع غيار أصلية',
     heroLead:
       'مهندسون متخصصون في تشخيص وعلاج أعطال غسالات بيكو الأوتوماتيك وغسالات أطباق بيكو وثلاجات وديب فريزر وأفران بيكو التركية داخل المنزل بضمان مكتوب.',
-    image: '/images/service-washer-dishwasher.webp',
+    image: '/images/service-washer-repair.webp',
     imageAlt: 'صيانة غسالات وغسالات أطباق وثلاجات بيكو في مصر',
     appliancesCovered: [
       { name: 'غسالات بيكو الأوتوماتيك (ProSmart Inverter)', details: 'معالجة أكواد H1 إلى H11، مشاكل الصرف والعصر، وتغيير السخان والبلي والطلمبة والكارتة.', serviceHref: '/services/washing-machine-repair' },
@@ -461,7 +461,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة أريستون وإندست (Ariston & Indesit) بالمنزل في مصر',
     heroLead:
       'صيانة دقيقة للأجهزة الإيطالية أريستون وإندست داخل منزلك: غسالات ملابس ومجففات، غسالات أطباق، سخانات كهرباء وغاز، ثلاجات، وأفران ومسطحات بلت-إن بقطع أصلية.',
-    image: '/images/service-washer-dishwasher.webp',
+    image: '/images/service-washer-repair.webp',
     imageAlt: 'صيانة غسالات وأفران وسخانات أريستون وإندست في مصر',
     appliancesCovered: [
       { name: 'غسالات أريستون وإندست والمجففات', details: 'معالجة أكواد F01 حتى F18، تغيير البلي والطلمبة والمساعدين وإصلاح الكروت الإلكترونية.', serviceHref: '/services/washing-machine-repair' },
@@ -529,7 +529,7 @@ export const BRANDS: BrandPage[] = [
     h1: 'صيانة أجهزة تورنيدو وأوليمبيك وألاسكا وإلكتروستار بالمنزل في مصر',
     heroLead:
       'تغطية شاملة لأشهر الماركات العملية في البيوت المصرية: تورنيدو، أوليمبيك إلكتريك، ألاسكا، إلكتروستار، وسخانات المصانع الحربية بقطع غيار أصلية وضمان مكتوب.',
-    image: '/images/service-fridge-freezer.webp',
+    image: '/images/service-fridge-repair.webp',
     imageAlt: 'صيانة أجهزة تورنيدو وأوليمبيك وألاسكا وإلكتروستار في مصر',
     appliancesCovered: [
       { name: 'سخانات أوليمبيك إلكتريك والمصانع الحربية (10 لتر) وتورنيدو', details: 'تغيير جلدة الرداخ، السويتش، الكارتة، الهيتر والثرموستات مع اختبار أمان كامل.', serviceHref: '/services/water-heater-repair' },

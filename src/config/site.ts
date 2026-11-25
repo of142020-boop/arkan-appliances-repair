@@ -18,10 +18,14 @@ export const SITE = {
 export const IMG_DIMS: Record<string, { w: number; h: number }> = {
   '/images/hero-home-appliances-repair.webp': { w: 1376, h: 768 },
   '/images/service-ac-repair.webp': { w: 896, h: 1200 },
-  '/images/service-fridge-freezer.webp': { w: 896, h: 1200 },
-  '/images/service-washer-dishwasher.webp': { w: 896, h: 1200 },
-  '/images/service-cooker-heater.webp': { w: 896, h: 1200 },
-  '/images/service-tv-microwave.webp': { w: 896, h: 1200 },
+  '/images/service-fridge-repair.webp': { w: 896, h: 1200 },
+  '/images/service-freezer-repair.webp': { w: 896, h: 1200 },
+  '/images/service-washer-repair.webp': { w: 896, h: 1200 },
+  '/images/service-dishwasher-repair.webp': { w: 896, h: 1200 },
+  '/images/service-cooker-repair.webp': { w: 896, h: 1200 },
+  '/images/service-heater-repair.webp': { w: 896, h: 1200 },
+  '/images/service-microwave-repair.webp': { w: 896, h: 1200 },
+  '/images/service-tv-repair.webp': { w: 896, h: 1200 },
   '/images/editorial-technician-care.webp': { w: 896, h: 1200 },
   '/images/egypt-cities-coverage.webp': { w: 1376, h: 768 },
 };
